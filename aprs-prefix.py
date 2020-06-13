@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May  7 18:23:20 2019
-
-@author: areed145
-"""
-
-import dns
 import aprslib
 from datetime import datetime
 from pymongo import MongoClient
@@ -22,14 +13,14 @@ def unpack_dict(d):
             try:
                 for k1, v1 in v.items():
                     message[k + "_" + k1] = v1
-            except:
+            except Exception:
                 try:
                     message[k] = v
-                except:
+                except Exception:
                     message[k] = str(v)
         raw.insert_one(message)
         print(message)
-    except:
+    except Exception:
         print("unpack failed")
 
 
@@ -46,5 +37,5 @@ if __name__ == "__main__":
             ais.set_filter("p/KK6GPV")
             ais.connect()
             ais.consumer(unpack_dict, raw=False)
-        except:
+        except Exception:
             pass
