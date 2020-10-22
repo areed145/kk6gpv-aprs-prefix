@@ -1,5 +1,5 @@
 import aprslib
-from datetime import datetime
+from datetime import datetime, timezone
 from pymongo import MongoClient
 import os
 
@@ -7,7 +7,7 @@ import os
 def unpack_dict(d):
     try:
         message = dict()
-        message["timestamp_"] = datetime.utcnow()
+        message["timestamp_"] = datetime.now(timezone.utc)
         message["script"] = "prefix"
         for k, v in d.items():
             try:
